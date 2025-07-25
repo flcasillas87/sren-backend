@@ -1,5 +1,5 @@
 // Importamos clases y constantes necesarias de la librería Discord.js
-import { Client, GatewayIntentBits } from 'discord.ts';
+import { Client, GatewayIntentBits } from 'discord.js';
 
 // Cargamos las variables de entorno desde un archivo .env
 import dotenv from 'dotenv';
@@ -26,5 +26,7 @@ client.on('messageCreate', (message) => {
 });
 
 // Iniciamos sesión con el token del bot (asegúrate de tener DISCORD_TOKEN en tu .env)
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN).catch((error) => {
+  console.error('Error al iniciar sesión:', error);
+});
 

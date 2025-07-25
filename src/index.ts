@@ -1,4 +1,15 @@
-// Importamos el módulo principal del bot de Discord
-import './discord.ts'; //  Importación local: requiere extensión .ts porque usamos ESM
+import express from 'express';
+import dotenv from 'dotenv';
 
-// Si tienes otras funcionalidades como HTTP o cron jobs, puedes agregarlas aquí.
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (_req, res) => {
+  res.send('SREN Backend en local funcionando ✅');
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
