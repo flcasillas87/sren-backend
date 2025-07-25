@@ -1,15 +1,12 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import { Client, GatewayIntentBits } from 'discord.js';
+import 'dotenv/config';
 
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get('/', (_req, res) => {
-  res.send('SREN Backend en local funcionando ✅');
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+client.once('ready', () => {
+  console.log(`✅ Bot conectado como ${client.user?.tag}`);
 });
+
+client.login(process.env.DISCORD_TOKEN);
