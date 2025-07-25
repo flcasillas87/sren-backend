@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    image: node
+    container_name: express-backend
+    working_dir: /app
+    volumes:
+      - /volume1/docker/sren_app/express-backend:/app
+    command: >
+     sh -c "
+     npm install &&
+     npm install --save node-fetch dotenv &&
+     npm install --save-dev @types/node-fetch nodemon typescript ts-node &&
+     npm run dev
+
+      "
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_USER: flcasillas
+      DB_PASSWORD: ""
+      DB_NAME: sren
+
+# MariaDB ya está en otro stack, así que asegúrate que backend y mariadb compartan red
+
+networks:
+  default:
+    external:
+      name: db-network
