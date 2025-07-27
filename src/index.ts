@@ -1,14 +1,17 @@
-// Carga las variables de entorno desde el archivo .env automáticamente
-import 'dotenv/config';
+import 'dotenv/config';                           // Carga las variables de entorno desde el archivo .env automáticamente
+import express from 'express';                    // Importa Express para crear el servidor web
+import { usersRouter } from './routes/users.js';  // Importa el router de usuarios (asegúrate de que la ruta tenga extensión .js para ESM)
+import { db } from './db/db.js';                 // Importa la conexión a la base de datos MariaDB (misma regla de extensión .js)
 
-// Importa Express para crear el servidor web
-import express from 'express';
+// Validar que las variables necesarias estén definidas
+const requiredEnv = ['PORT', 'DB_HOST', 'DB_PORT', 'DB_USER', 'DB_NAME', 'DISCORD_TOKEN'];
+for (const key of requiredEnv) {
+  if (!process.env[key]) {
+    console.error(`❌ Error: La variable de entorno ${key} NO está definida.`);
+    process.exit(1); // Salir del proceso con error
+  }
+}
 
-// Importa el router de usuarios (asegúrate de que la ruta tenga extensión .js para ESM)
-import { usersRouter } from './routes/users.js';
-
-// Importa la conexión a la base de datos MariaDB (misma regla de extensión .js)
-import { db } from './db/db.js';
 
 // Crea una instancia de la aplicación Express
 const app = express();
@@ -44,3 +47,4 @@ app.get('/', (_req, res) => {
 app.listen(port, () => {
   console.log(`🚀 Servidor en http://localhost:${port}`);
 });
+
