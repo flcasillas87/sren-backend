@@ -1,10 +1,11 @@
-import { pool } from '../db/connection.js';
+import { Request, Response } from 'express';
+import { fetchUsers } from '../services/userService.js';
 
-export const getUsers = async (req, res) => {
+export async function getUsers(req: Request, res: Response) {
   try {
-    const [rows] = await pool.query('SELECT * FROM usuarios');
-    res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const users = await fetchUsers();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Error obteniendo usuarios' });
   }
-};
+}
