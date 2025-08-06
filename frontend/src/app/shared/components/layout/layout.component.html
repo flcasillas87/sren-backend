@@ -1,0 +1,17 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="isSidenavOpen">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Header -->
+    <app-header></app-header>
+
+    <!-- Main Content Area -->
+    <router-outlet></router-outlet>
+HOLA
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
