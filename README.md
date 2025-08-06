@@ -6,3 +6,28 @@ Este repositorio contiene el código fuente para un proyecto backend en **TypeSc
 
 ## 📁 Estructura del Proyecto
 
+## 🧰 Tecnologías Utilizadas
+
+- Backend:
+  - Node.js
+  - TypeScript
+  - Express
+  - MariaDB (como servicio o externo)
+  - Docker
+  - Dotenv
+- Frontend (independiente):
+  - Angular / React / Vue (según el caso)
+  - Docker
+- DevOps:
+  - Docker Compose
+  - Portainer
+  - Git + GitHub
+
+---
+
+## ⚙️ Configuración del entorno de desarrollo
+
+1. **Clonar el repositorio**
+```bash
+git clone https://github.com/tuusuario/tu-repo.git
+cd tu-repo
