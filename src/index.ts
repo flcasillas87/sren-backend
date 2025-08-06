@@ -1,12 +1,13 @@
-import { Client, GatewayIntentBits } from 'discord.js';
+import express from 'express';
+import userRoutes from './routes/userRoutes.js';
 import 'dotenv/config';
 
-const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
-});
+const app = express();
+const port = process.env.PORT || 3000;
 
-client.once('ready', () => {
-  console.log(`✅ Bot conectado como ${client.user?.tag}`);
-});
+app.use(express.json());
+app.use('/users', userRoutes);
 
-client.login(process.env.DISCORD_TOKEN);
+app.listen(port, () => {
+  console.log(`🚀 Servidor en http://localhost:${port}`);
+});

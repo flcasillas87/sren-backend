@@ -173,3 +173,4 @@ Desktop.ini
 *.bak
 *.orig
 *.save
+/src/generated/prisma
