@@ -50,13 +50,11 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./header-toggler.component.css'],
 })
 export class HeaderTogglerComponent {
-
   // Emite el evento de alternar el sidenav
   @Output() toggle = new EventEmitter<void>();
 
   // Método para emitir el evento cuando se hace clic en el botón
   onToggleSidenav(): void {
-    this.toggle.emit();  // Notifica al LayoutComponent
+    this.toggle.emit(); // Notifica al LayoutComponent
   }
 }
-

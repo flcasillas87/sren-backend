@@ -4,10 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';  // Importando RouterModule
+import { RouterModule } from '@angular/router'; // Importando RouterModule
 import { FooterContentService } from '../../../core/services/layout.service';
 import { FooterContent } from '../../../core/models/layout.model';
-
 
 @Component({
   selector: 'app-footer',
@@ -28,5 +27,4 @@ export class FooterComponent {
   constructor(private footerContentService: FooterContentService) {
     // Aquí no es necesario el uso de `inject` para el servicio.
   }
-
 }

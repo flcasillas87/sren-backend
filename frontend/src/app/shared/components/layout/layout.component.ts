@@ -30,7 +30,7 @@ import { HeaderComponent } from '../header/header.component';
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-  ]
+  ],
 })
 export class LayoutComponent {
   private breakpointObserver = inject(BreakpointObserver);
@@ -39,8 +39,8 @@ export class LayoutComponent {
   readonly isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
-      shareReplay()
+      map((result) => result.matches),
+      shareReplay(),
     );
 
   isSidenavOpen = true;

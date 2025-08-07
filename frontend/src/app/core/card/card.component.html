@@ -1,11 +1,21 @@
 <div>
-    @for (item of precios; track $index) {
+  @for (item of precios; track $index) {
     <ul>
-        {{ item.id }}
-        {{ item.name }}
-        {{ item.central }}
-        {{ item.fecha }}
-        {{ item.valor }}
+      {{
+        item.id
+      }}
+      {{
+        item.name
+      }}
+      {{
+        item.central
+      }}
+      {{
+        item.fecha
+      }}
+      {{
+        item.valor
+      }}
     </ul>
-    }
+  }
 </div>

@@ -6,11 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   selector: 'app-header-logo',
   standalone: true,
-  imports: [
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-  ],
+  imports: [MatIconModule, MatButtonModule, MatToolbarModule],
   templateUrl: './header-logo.component.html',
   styleUrl: './header-logo.component.css',
 })

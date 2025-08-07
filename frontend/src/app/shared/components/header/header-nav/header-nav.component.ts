@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './header-nav.component.html',
-  styleUrl: './header-nav.component.css'
+  styleUrl: './header-nav.component.css',
 })
-export class HeaderNavComponent {
-
-}
+export class HeaderNavComponent {}

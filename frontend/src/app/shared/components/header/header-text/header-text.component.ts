@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './header-text.component.html',
-  styleUrl: './header-text.component.css'
+  styleUrl: './header-text.component.css',
 })
-export class HeaderTextComponent {
-
-}
+export class HeaderTextComponent {}

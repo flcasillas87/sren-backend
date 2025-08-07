@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class LayoutService {
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {}
 
   show(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
@@ -23,11 +23,11 @@ export class FooterContentService {
   private footerContent = signal<FooterContent>({
     contactInfo: 'Dirección: 123 Calle Principal, Ciudad',
     links: [
-      { title: 'Inicio', url: '/',icon: 'home' },
-      { title: 'Acerca de nosotros', url: '/about',icon: 'info' },
-      { title: 'Contacto', url: '/contact',icon: 'contact_mail' },
-      { title: 'Dashboard', url: '/Dasboard',icon: 'dashboard' },
-     /*{
+      { title: 'Inicio', url: '/', icon: 'home' },
+      { title: 'Acerca de nosotros', url: '/about', icon: 'info' },
+      { title: 'Contacto', url: '/contact', icon: 'contact_mail' },
+      { title: 'Dashboard', url: '/Dasboard', icon: 'dashboard' },
+      /*{
         id:  ,
         url: 'string',
         label: 'string',

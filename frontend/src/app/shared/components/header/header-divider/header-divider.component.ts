@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './header-divider.component.html',
-  styleUrl: './header-divider.component.css'
+  styleUrl: './header-divider.component.css',
 })
-export class HeaderDividerComponent {
-
-}
+export class HeaderDividerComponent {}

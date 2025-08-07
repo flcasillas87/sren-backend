@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 import { HeaderBrandComponent } from './header-brand/header-brand.component';
 import { HeaderDividerComponent } from './header-divider/header-divider.component';
 import { HeaderLogoComponent } from './header-logo/header-logo.component';
