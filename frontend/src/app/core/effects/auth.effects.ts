@@ -16,7 +16,7 @@ export class HelloEffects {
       map((action) => {
         console.log('Mensaje establecido:', action.message);
         return action;
-      })
-    )
+      }),
+    ),
   );
 }

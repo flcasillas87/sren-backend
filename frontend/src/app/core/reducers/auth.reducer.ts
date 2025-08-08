@@ -12,5 +12,5 @@ export const initialState: HelloState = {
 export const helloReducer = createReducer(
   initialState,
   on(setMessage, (state, { message }) => ({ ...state, message })),
-  on(clearMessage, (state) => ({ ...state, message: '' }))
+  on(clearMessage, (state) => ({ ...state, message: '' })),
 );

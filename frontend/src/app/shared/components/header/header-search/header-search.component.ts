@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './header-search.component.html',
-  styleUrl: './header-search.component.css'
+  styleUrl: './header-search.component.css',
 })
-export class HeaderSearchComponent {
-
-}
+export class HeaderSearchComponent {}

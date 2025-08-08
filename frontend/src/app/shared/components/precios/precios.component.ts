@@ -6,9 +6,6 @@ import { PreciosService } from '../../../features/precios/services/precios.servi
   standalone: true,
   imports: [],
   templateUrl: './precios.component.html',
-  styleUrl: './precios.component.css'
+  styleUrl: './precios.component.css',
 })
-export default class PreciosComponent {
-
-  
-}
+export default class PreciosComponent {}

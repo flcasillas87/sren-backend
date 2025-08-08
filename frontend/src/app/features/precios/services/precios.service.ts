@@ -15,9 +15,9 @@ export class PriceService {
     const newPrice: Price = {
       id: crypto.randomUUID(),
       date: new Date(),
-      ...priceData
+      ...priceData,
     };
 
-    this._prices.update(prices => [...prices, newPrice]);
+    this._prices.update((prices) => [...prices, newPrice]);
   }
 }

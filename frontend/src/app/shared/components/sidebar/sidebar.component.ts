@@ -8,6 +8,4 @@ import { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent {
-  
-}
+export class SidebarComponent {}

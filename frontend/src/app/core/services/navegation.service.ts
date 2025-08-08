@@ -8,44 +8,45 @@ import { MenuItem } from '../models/layout.model';
 })
 export class MenuService {
   // Lista de elementos del menú como un BehaviorSubject para permitir la suscripción a cambios
-  private readonly menuItemsSubject: BehaviorSubject<MenuItem[]> = new BehaviorSubject<MenuItem[]>([
-    {
-      id: 0,
-      url: 'admin',
-      label: 'Admin',
-      name: 'Admin',
-      href: '',
-      icon: 'home',
-      divider: true,
-    },
-    {
-      id: 1,
-      url: 'dashboard',
-      label: 'Dashboard',
-      name: 'Dashboard',
-      href: '',
-      icon: 'newspaper',
-      divider: true,
-    },
-    {
-      id: 2,
-      url: 'table',
-      label: 'Tablas',
-      name: 'Tablas',
-      href: '',
-      icon: 'monitoring',
-      divider: true,
-    },
-    {
-      id: 3,
-      url: 'card',
-      label: 'Card',
-      name: 'Card',
-      href: '',
-      icon: 'monitoring',
-      divider: true,
-    },
-  ]);
+  private readonly menuItemsSubject: BehaviorSubject<MenuItem[]> =
+    new BehaviorSubject<MenuItem[]>([
+      {
+        id: 0,
+        url: 'admin',
+        label: 'Admin',
+        name: 'Admin',
+        href: '',
+        icon: 'home',
+        divider: true,
+      },
+      {
+        id: 1,
+        url: 'dashboard',
+        label: 'Dashboard',
+        name: 'Dashboard',
+        href: '',
+        icon: 'newspaper',
+        divider: true,
+      },
+      {
+        id: 2,
+        url: 'table',
+        label: 'Tablas',
+        name: 'Tablas',
+        href: '',
+        icon: 'monitoring',
+        divider: true,
+      },
+      {
+        id: 3,
+        url: 'card',
+        label: 'Card',
+        name: 'Card',
+        href: '',
+        icon: 'monitoring',
+        divider: true,
+      },
+    ]);
 
   // Observable para exponer los elementos del menú
   menuItems$: Observable<MenuItem[]> = this.menuItemsSubject.asObservable();
@@ -75,7 +76,9 @@ export class MenuService {
    */
   updateMenuItem(id: string | number, updatedItem: MenuItem): void {
     const currentItems = this.menuItemsSubject.value;
-    const updatedItems = currentItems.map(item => item.id === id ? updatedItem : item);
+    const updatedItems = currentItems.map((item) =>
+      item.id === id ? updatedItem : item,
+    );
     this.menuItemsSubject.next(updatedItems);
     this.saveMenuItems(); // Guardar en localStorage después de actualizar
   }
@@ -86,7 +89,7 @@ export class MenuService {
    */
   deleteMenuItem(id: string | number): void {
     const currentItems = this.menuItemsSubject.value;
-    const updatedItems = currentItems.filter(item => item.id !== id);
+    const updatedItems = currentItems.filter((item) => item.id !== id);
     this.menuItemsSubject.next(updatedItems);
     this.saveMenuItems(); // Guardar en localStorage después de eliminar
   }
@@ -115,10 +118,10 @@ export class MenuService {
    * @param predicate La función de criterio de filtrado.
    * @returns Un Observable que emite la lista de elementos del menú filtrados.
    */
-  filterMenuItems(predicate: (item: MenuItem) => boolean): Observable<MenuItem[]> {
-    return this.menuItems$.pipe(
-      map(items => items.filter(predicate))
-    );
+  filterMenuItems(
+    predicate: (item: MenuItem) => boolean,
+  ): Observable<MenuItem[]> {
+    return this.menuItems$.pipe(map((items) => items.filter(predicate)));
   }
 
   /**
@@ -128,7 +131,11 @@ export class MenuService {
    */
   searchMenuItems(searchTerm: string): Observable<MenuItem[]> {
     return this.menuItems$.pipe(
-      map(items => items.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())))
+      map((items) =>
+        items.filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
+      ),
     );
   }
 }

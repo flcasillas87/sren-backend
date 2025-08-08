@@ -25,7 +25,6 @@ import { MatCardModule } from '@angular/material/card';
 export default class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
-
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -44,6 +43,6 @@ export default class DashboardComponent {
         { title: 'Card 3', cols: 1, rows: 2 },
         { title: 'Card 4', cols: 1, rows: 1 },
       ];
-    })
+    }),
   );
 }

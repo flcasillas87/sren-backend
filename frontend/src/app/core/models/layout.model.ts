@@ -32,7 +32,6 @@ export interface FooterContent {
   copyright: string;
 }
 
-
 // Otras interfaces relacionadas con el layout pueden ser añadidas aquí
 // Ejemplo:
 export interface HeaderContent {

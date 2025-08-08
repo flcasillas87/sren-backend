@@ -12,5 +12,8 @@
     "forceConsistentCasingInFileNames": true // 📌 Obliga a usar el mismo casing en nombres de archivos
   },
   "include": ["src"],                  // 📌 Archivos TypeScript que se deben compilar
-  "exclude": ["node_modules"]          // 📌 Ignora la carpeta node_modules en la compilación
+  "exclude": [
+    "node_modules"                     // 📌 Ignora la carpeta node_modules en la compilación
+    "**/*.spec.ts"                     /* Excluye archivos de prueba. */
+  ]          
 }

@@ -10,8 +10,8 @@ export const consumptionService = () => {
     consumptions,
     addConsumption: (consumption: Omit<Consumption, 'id'>) => {
       const newConsumption = { ...consumption, id: crypto.randomUUID() };
-      consumptions.update(current => [...current, newConsumption]);
+      consumptions.update((current) => [...current, newConsumption]);
       return http.post('/api/consumptions', newConsumption);
-    }
+    },
   };
 };

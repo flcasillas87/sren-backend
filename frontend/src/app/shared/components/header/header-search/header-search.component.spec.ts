@@ -8,10 +8,9 @@ describe('HeaderSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderSearchComponent]
-    })
-    .compileComponents();
-    
+      imports: [HeaderSearchComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HeaderSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

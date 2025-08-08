@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './breadcrumbs.component.html',
-  styleUrl: './breadcrumbs.component.css'
+  styleUrl: './breadcrumbs.component.css',
 })
-export default class BreadcrumbsComponent {
-
-}
+export default class BreadcrumbsComponent {}

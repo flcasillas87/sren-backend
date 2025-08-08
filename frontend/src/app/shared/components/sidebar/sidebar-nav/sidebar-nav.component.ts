@@ -25,12 +25,13 @@ import { takeUntil } from 'rxjs/operators';
   ],
 })
 export class SidebarNavComponent implements OnInit, OnDestroy {
-  menuItems$: Observable<MenuItem[]> = this.sidebarNavService.filteredMenuItems$;
+  menuItems$: Observable<MenuItem[]> =
+    this.sidebarNavService.filteredMenuItems$;
   private destroy$ = new Subject<void>();
 
-  constructor(private sidebarNavService: SidebarNavService) { }
+  constructor(private sidebarNavService: SidebarNavService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -40,12 +41,26 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
 
   // Métodos que solo interactúan con el servicio
   addMenuItem(): void {
-    const newItem: MenuItem = { id: 3, name: 'New Item', icon: 'add', divider: false, url: '', href: '' };
+    const newItem: MenuItem = {
+      id: 3,
+      name: 'New Item',
+      icon: 'add',
+      divider: false,
+      url: '',
+      href: '',
+    };
     this.sidebarNavService.addMenuItem(newItem);
   }
 
   updateMenuItem(id: number): void {
-    const updatedItem: MenuItem = { id, name: 'Updated Item', icon: 'edit', divider: false, url: '', href: '' };
+    const updatedItem: MenuItem = {
+      id,
+      name: 'Updated Item',
+      icon: 'edit',
+      divider: false,
+      url: '',
+      href: '',
+    };
     this.sidebarNavService.updateMenuItem(id, updatedItem);
   }
 
@@ -57,5 +72,4 @@ export class SidebarNavComponent implements OnInit, OnDestroy {
     const input = event.target as HTMLInputElement;
     this.sidebarNavService.searchMenuItems(input.value);
   }
-  
 }
