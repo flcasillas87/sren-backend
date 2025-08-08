@@ -1,13 +1,18 @@
 {
   "name": "sren-backend",
   "version": "1.0.0",
+  "description": "Un backend de ejemplo con Express y TypeScript",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm src/index.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "discord.js": "^14.21.0",
@@ -20,9 +25,9 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
-    "@types/node": "^24.1.0",
+    "@types/node": "^24.2.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }
