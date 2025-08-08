@@ -21,7 +21,7 @@ Ejecución directa de TypeScript (ts-node)
 Soporte para módulos ES
 Cuándo usarlo: Durante el desarrollo activo cuando necesitas ver cambios en tiempo real.
 
-### `build`
+### build
 bash
 npm run build
 Propósito: Compila el código TypeScript a JavaScript en la carpeta dist/.
