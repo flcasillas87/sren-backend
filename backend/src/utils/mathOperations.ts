@@ -7,7 +7,7 @@
  * @returns La suma de a y b.
  */
 export function add(a: number, b: number): number {
-    return a + b;
+  return a + b;
 }
 
 /**
@@ -17,7 +17,7 @@ export function add(a: number, b: number): number {
  * @returns La resta de a y b.
  */
 export function subtract(a: number, b: number): number {
-    return a - b;
+  return a - b;
 }
 
 // También puedes exportar constantes o clases
