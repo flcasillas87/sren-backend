@@ -21,7 +21,6 @@ Ejecución directa de TypeScript (ts-node)
 Soporte para módulos ES
 Cuándo usarlo: Durante el desarrollo activo cuando necesitas ver cambios en tiempo real.
 
-```bash
 ### `build`
 bash
 npm run build
