@@ -1,7 +1,0 @@
-services:
-  alpine:
-    image: alpine:latest
-    container_name: alpine_test
-    command: sh -c "while true; do echo 'Alpine corriendo...'; sleep 5; done"
-    restart: unless-stopped
-

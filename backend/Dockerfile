@@ -1,20 +1,20 @@
-# backend/Dockerfile
-# Etapa de build
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-# Etapa de producción
+# Usar Node.js como base
 FROM node:20-alpine
 
+# Establecer directorio de trabajo
 WORKDIR /app
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/dist ./dist
 
-RUN npm ci --omit=dev
+# Copiar package.json y package-lock.json
+COPY package*.json ./
 
-CMD ["node", "dist/index.js"]
+# Instalar dependencias
+RUN npm install --production
+
+# Copiar el resto del código
+COPY . .
+
+# Puerto de la aplicación
+EXPOSE 3000
+
+# Comando de inicio
+CMD ["npm", "start"]
