@@ -28,22 +28,22 @@ class Logger {
     return this.levelPriority[level] <= this.levelPriority[this.currentLevel];
   }
 
-  info(message: string, ...args: any[]) {
+  info(message: string, ...args: unknown[]) {
     if (!this.shouldLog('info')) return;
     console.log(`${colors.green}[INFO]${colors.reset} ${message}`, ...args);
   }
 
-  warn(message: string, ...args: any[]) {
+  warn(message: string, ...args: unknown[]) {
     if (!this.shouldLog('warn')) return;
     console.warn(`${colors.yellow}[WARN]${colors.reset} ${message}`, ...args);
   }
 
-  error(message: string, ...args: any[]) {
+  error(message: string, ...args: unknown[]) {
     if (!this.shouldLog('error')) return;
     console.error(`${colors.red}[ERROR]${colors.reset} ${message}`, ...args);
   }
 
-  debug(message: string, ...args: any[]) {
+  debug(message: string, ...args: unknown[]) {
     if (!this.shouldLog('debug')) return;
     console.debug(`${colors.cyan}[DEBUG]${colors.reset} ${message}`, ...args);
   }

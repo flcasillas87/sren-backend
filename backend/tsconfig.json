@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2024", // 📌 Versión de JavaScript que generará (Node 18+ soporta ES2022)
-    "module": "NodeNext", // 📌 Usa módulos ESM compatibles con Node (import/export)
-    "moduleResolution": "NodeNext", // 📌 Cómo se resuelven los imports en proyectos ESM
+    "module": "ESNext", // 📌 Usa módulos ESM compatibles con Node (import/export)
+    "moduleResolution": "Node", // 📌 Cómo se resuelven los imports en proyectos ESM
     "outDir": "./dist", // 📌 Carpeta donde se guardarán los .js compilados
     "rootDir": "./src", // 📌 Carpeta raíz donde está el código fuente TypeScript
     "esModuleInterop": true, // 📌 Permite importar módulos CommonJS como si fueran ESM (ej: import express)
