@@ -29,4 +29,3 @@ client.on('messageCreate', (message) => {
 client.login(process.env.DISCORD_TOKEN).catch((error) => {
   console.error('Error al iniciar sesión:', error);
 });
-
