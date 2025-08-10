@@ -1,25 +1,23 @@
-import express, { Application, Request, Response } from 'express';                    // Importa el framework Express para crear el servidor HTTP
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-//import path from 'path';
 import morgan from 'morgan';
-//import { fileURLToPath } from 'url';
-import userRoutes from './routes/userRoutes.js';  // Importa las rutas de usuarios desde un archivo separado
-import dotenv from 'dotenv';                           // Carga las variables de entorno desde el archivo .env automáticamente
+import dotenv from 'dotenv';
+
+import userRoutes from './routes/userRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
 
-const app: Application = express();                             // Crea una instancia de la aplicación Express
-const port = process.env.PORT || 3000;            // Obtiene el puerto desde variables de entorno, o usa 3000 si no está definido
-
-app.use(express.json());                          // Middleware que permite a Express interpretar datos JSON en el cuerpo de las peticiones
+// Inicializar aplicación
+const app: Application = express();
+const port = process.env.PORT || 3000;
 
 // Middlewares globales
-app.use(cors()); // Permitir peticiones desde otros dominios
-app.use(morgan('dev')); // Log de solicitudes en consola
-app.use(express.json()); // Parsear JSON en body
+app.use(cors());              // Permitir peticiones desde otros dominios
+app.use(morgan('dev'));       // Mostrar logs de peticiones en consola
+app.use(express.json());      // Parsear JSON en body
 
-// Ruta raíz (útil para comprobar que el servidor está vivo)
+// Ruta raíz (para comprobar que el servidor funciona)
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({ message: 'API funcionando 🚀' });
 });
@@ -32,13 +30,13 @@ app.use((req: Request, res: Response) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Manejo centralizado de errores (middleware de error)
-app.use((err: any, req: Request, res: Response, next: Function) => {
+// Manejo centralizado de errores
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Error interno del servidor' });
 });
 
-// Inicia el servidor y escucha en el puerto especificado
+// Iniciar servidor
 app.listen(port, () => {
-  console.log(`🚀 Servidor en http://localhost:${port}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 });
