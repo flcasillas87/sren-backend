@@ -3,7 +3,6 @@ import userRoutes from './userRoutes.js';
 import notFoundHandler from '../middlewares/notFoundHandler.js';
 import errorHandler from '../middlewares/errorHandler.js';
 
-
 // Función para registrar todas las rutas en la aplicación Express
 export function registerRoutes(app: Application): void {
   // Aquí puedes registrar todas las rutas de tu aplicación
@@ -13,8 +12,7 @@ export function registerRoutes(app: Application): void {
   // app.use('/products', productRoutes);
   // app.use('/orders', orderRoutes);
 
-// Middlewares para errores (siempre al final)
+  // Middlewares para errores (siempre al final)
   app.use(notFoundHandler);
   app.use(errorHandler);
-}  
-
+}

@@ -2,31 +2,32 @@
 import { Request, Response } from 'express';
 import * as userService from '../services/userService.js';
 
-export function getUsers(req: Request, res: Response): void {
-  res.json(userService.getAllUsers());
-}
-
-export function getUser(req: Request, res: Response): void {
-  const id = Number(req.params.id);
-  const user = userService.getUserById(id);
-  if (!user) {
-    res.status(404).json({ error: 'Usuario no encontrado' });
-    return;
+// Lógica para crear un nuevo usuario
+export async function createUser(req: Request, res: Response) {
+  const userData = req.body;
+  const result = await userService.createUser(userData);
+  if (result.success) {
+    res.status(201).json(result.user);
+  } else {
+    res.status(202).json({ message: result.message });
   }
-  res.json(user);
 }
 
-export function createUser(req: Request, res: Response): void {
-  const user = userService.createUser(req.body);
-  res.status(201).json(user);
+// Lógica para obtener todos los usuarios
+export async function getUsers(req: Request, res: Response) {
+  res.json({ message: 'getUsers funcionando' });
 }
 
-export function removeUser(req: Request, res: Response): void {
-  const id = Number(req.params.id);
-  const deleted = userService.deleteUser(id);
-  if (!deleted) {
-    res.status(404).json({ error: 'Usuario no encontrado' });
-    return;
-  }
-  res.status(204).send();
+
+export async function getUser(req: Request, res: Response) {
+  // lógica para obtener un usuario por id
+  const id = req.params.id;
+  res.json({ message: `getUser con id ${id} funcionando` });
+}
+
+// Eliminar un usuario por id
+export async function removeUser(req: Request, res: Response) {
+  // lógica para eliminar usuario por id
+  const id = req.params.id;
+  res.json({ message: `removeUser con id ${id} funcionando` });
 }
