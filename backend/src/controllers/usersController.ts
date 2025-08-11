@@ -18,7 +18,6 @@ export async function getUsers(req: Request, res: Response) {
   res.json({ message: 'getUsers funcionando' });
 }
 
-
 export async function getUser(req: Request, res: Response) {
   // lógica para obtener un usuario por id
   const id = req.params.id;

@@ -1,5 +1,7 @@
 import { Application } from 'express';
 import userRoutes from './userRoutes.js';
+import consumoRoutes from './consumoRoutes.js';
+
 import notFoundHandler from '../middlewares/notFoundHandler.js';
 import errorHandler from '../middlewares/errorHandler.js';
 
@@ -7,6 +9,7 @@ import errorHandler from '../middlewares/errorHandler.js';
 export function registerRoutes(app: Application): void {
   // Aquí puedes registrar todas las rutas de tu aplicación
   app.use('/users', userRoutes);
+  app.use('/api', consumoRoutes);
   app.get('/', (_, res) => res.json({ message: 'API funcionando 🚀' }));
   // Aquí podrías agregar más rutas:
   // app.use('/products', productRoutes);

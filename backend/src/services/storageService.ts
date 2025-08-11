@@ -4,7 +4,9 @@ import path from 'path';
 const dataFilePath = path.resolve('data.json'); // Ruta del archivo JSON local
 
 // Verifica si el archivo existe y si no, lo crea con datos iniciales
-export async function ensureDataFileExists(initialData: any = []): Promise<void> {
+export async function ensureDataFileExists(
+  initialData: any = [],
+): Promise<void> {
   try {
     await fs.access(dataFilePath);
     // Si no hay error, el archivo existe
@@ -51,7 +53,9 @@ export async function deleteRecordById(id: string | number): Promise<void> {
 }
 
 // Función para sincronizar datos guardados localmente con base de datos
-export async function syncWithDatabase(syncFn: (data: any) => Promise<void>): Promise<void> {
+export async function syncWithDatabase(
+  syncFn: (data: any) => Promise<void>,
+): Promise<void> {
   const data = await loadData();
   try {
     await syncFn(data);

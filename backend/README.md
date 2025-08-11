@@ -28,6 +28,8 @@ Este repositorio contiene el código fuente para un proyecto backend en **TypeSc
 ## ⚙️ Configuración del entorno de desarrollo
 
 1. **Clonar el repositorio**
+
 ```bash
 git clone https://github.com/tuusuario/tu-repo.git
 cd tu-repo
+```

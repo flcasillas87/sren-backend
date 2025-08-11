@@ -1,47 +1,43 @@
 // eslint.config.js
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
-import globals from "globals";
-import prettierConfig from "eslint-config-prettier";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import globals from 'globals';
+import prettier from 'eslint-config-prettier';
+import path from 'path';
+import url from 'url';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default [
-  // 1. Configuración global
   {
-  // Ignora los archivos de compilación y las dependencias
-    ignores: ["dist/", "node_modules/"],
+    ignores: ['dist/', 'node_modules/'],
   },
 
-  // 2. Configuración base de ESLint para archivos JavaScript
+  // Configuración recomendada de JS
   js.configs.recommended,
 
-  // 3. Configuraciones recomendadas para TypeScript
-  // Usamos '...' para expandir los arrays de configuración que vienen del plugin
+  // Configuración recomendada de TS para Flat Config
   ...tseslint.configs.recommended,
 
-  // 4. Configuración para desactivar reglas que conflictúan con Prettier
-  // ¡IMPORTANTE: Debe ir después de las otras configuraciones de reglas!
-  prettierConfig,
+  // Prettier (versión Flat Config)
+  prettier,
 
-  // 5. Configuración personalizada para tus archivos TypeScript del proyecto
+  // Config personalizada para TS en src
   {
-    files: ["src/**/*.ts"], // Aplica esta configuración solo a archivos .ts dentro de 'src'
+    files: ['src/**/*.ts'],
     languageOptions: {
       globals: {
-        ...globals.node, // Agrega todos los globales de Node.js
+        ...globals.node,
       },
       parserOptions: {
-        // Indica a ESLint que use el tsconfig.json para reglas basadas en tipos
-        project: true,
-        // Directorio raíz para buscar el tsconfig.json
-        tsconfigRootDir: import.meta.dirname,
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
       },
     },
     rules: {
-      // Aquí puedes añadir o sobrescribir reglas
-      // Ejemplo: Requerir el uso de 'const' o 'let' en lugar de 'var'
-      "no-var": "error",
-      // Ejemplo: Advertir sobre el uso de 'any' en lugar de fallar
-      "@typescript-eslint/no-explicit-any": "warn",
+      'no-var': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
 ];
