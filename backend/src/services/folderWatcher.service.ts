@@ -14,9 +14,15 @@ const watcher = chokidar.watch(WATCH_FOLDER, {
 });
 
 watcher
-  .on('add', (filePath) => console.log(`📄 Archivo añadido: ${path.basename(filePath)}`))
-  .on('change', (filePath) => console.log(`✏️ Archivo modificado: ${path.basename(filePath)}`))
-  .on('unlink', (filePath) => console.log(`❌ Archivo eliminado: ${path.basename(filePath)}`))
+  .on('add', (filePath) =>
+    console.log(`📄 Archivo añadido: ${path.basename(filePath)}`),
+  )
+  .on('change', (filePath) =>
+    console.log(`✏️ Archivo modificado: ${path.basename(filePath)}`),
+  )
+  .on('unlink', (filePath) =>
+    console.log(`❌ Archivo eliminado: ${path.basename(filePath)}`),
+  )
   .on('error', (error) => console.error(`🔥 Error: ${error}`));
 
 console.log(`👀 Vigilando la carpeta: ${WATCH_FOLDER}`);

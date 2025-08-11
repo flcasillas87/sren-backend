@@ -1,18 +1,23 @@
 import { Application } from 'express';
-import consumoRoutes from './consumoRoutes.js';
 
+import centralesRoutes from './centrales.routes.js';
+import authRoutes from './auth.routes.js';
+import userRoutes from './users.routes.js';
+import consumoRoutes from './consumos.routes.js';
+import aboutRoutes from './abouth.routes.js';
+import { getHome } from '../controllers/home.controller.js';
 import notFoundHandler from '../middlewares/notFoundHandler.js';
 import errorHandler from '../middlewares/errorHandler.js';
 
-// Función para registrar todas las rutas en la aplicación Express
 export function registerRoutes(app: Application): void {
-  // Aquí puedes registrar todas las rutas de tu aplicación
+  app.get('/', getHome);
 
-  app.use('/', consumoRoutes);
+  app.use('/about', aboutRoutes);
+  app.use('/auth', authRoutes);
+  app.use('/users', userRoutes);
+  app.use('/consumos', consumoRoutes);
+  app.use('/centrales', centralesRoutes);
 
-  app.get('/', (_, res) => res.json({ message: 'API funcionando 🚀' }));
-
-  // Middlewares para errores (siempre al final)
   app.use(notFoundHandler);
   app.use(errorHandler);
 }

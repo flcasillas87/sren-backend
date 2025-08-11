@@ -1,27 +1,28 @@
 import { prisma } from '../db/prismaClient.js';
+import type { centrales } from '@prisma/client';
 
-import { PrismaClient, Centrales } from "@prisma/client";
 
-const prisma = new PrismaClient();
 
-export async function crearCentral(nombre: string, ubicacion?: string): Promise<Centrales> {
+export async function crearCentral(
+  nombre: string,
+  ubicacion?: string,
+): Promise<centrales> {
   if (!nombre?.trim()) {
-    throw new Error("El nombre de la central es obligatorio");
+    throw new Error('El nombre de la central es obligatorio');
   }
 
   try {
-    const data: Partial<Centrales> = { nombre };
+    const data: Partial<centrales> = { nombre };
     if (ubicacion?.trim()) {
       data.ubicacion = ubicacion;
     }
 
     return await prisma.centrales.create({ data });
   } catch (error) {
-    console.error("Error creando central:", error);
-    throw new Error("No se pudo crear la central");
+    console.error('Error creando central:', error);
+    throw new Error('No se pudo crear la central');
   }
 }
-
 
 export async function listarCentrales() {
   return prisma.centrales.findMany();

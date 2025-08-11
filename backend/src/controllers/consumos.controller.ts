@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import * as centralesService from '../services/centralesServices.js';
+import * as consumoService from '../services/consumos.service.js';
 
 export async function agregarConsumo(req: Request, res: Response) {
   try {
     const { centralId, fecha, valorGJ } = req.body;
-    const consumo = await centralesService.crearCentral(
-        nombre,
-        new Date(fecha),
-        valorGJ,
+    const consumos = await consumoService.crearConsumo(
+      centralId,
+      new Date(fecha),
+      valorGJ,
     );
-    res.status(201).json(consumo);
+    res.status(201).json(consumos);
   } catch (error) {
     res.status(500).json({ error: 'Error creando consumo' });
   }
