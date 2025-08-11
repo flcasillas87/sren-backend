@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import * as consumoService from '../services/consumoService.js';
+import * as centralesService from '../services/centralesServices.js';
 
 export async function agregarConsumo(req: Request, res: Response) {
   try {
     const { centralId, fecha, valorGJ } = req.body;
-    const consumo = await consumoService.crearConsumo(
-      centralId,
-      new Date(fecha),
-      valorGJ,
+    const consumo = await centralesService.crearCentral(
+        nombre,
+        new Date(fecha),
+        valorGJ,
     );
     res.status(201).json(consumo);
   } catch (error) {

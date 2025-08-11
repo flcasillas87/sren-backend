@@ -4,10 +4,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import { registerRoutes } from './routes/index.js';
-import {
-  ensureDataFileExists,
-  syncWithDatabase,
-} from './services/storageService.js';
+import {  ensureDataFileExists,  syncWithDatabase,} from './services/storageService.js';
 
 dotenv.config();
 

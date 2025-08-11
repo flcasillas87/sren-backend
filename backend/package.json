@@ -16,10 +16,12 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "prepare": "husky install"
+    "prepare": "husky install",
+     "search": "powershell -Command \"Select-String -Path 'src/**/*.ts' -Pattern $env:SEARCH\""
+
   },
   "keywords": [],
-  "author": "",
+  "author": "Fernando López Casillas :)",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.13.0",
