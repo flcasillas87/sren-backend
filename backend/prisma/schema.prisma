@@ -21,32 +21,71 @@ model alertas {
   @@index([planta_id], map: "planta_id")
 }
 
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model centrales {
-  id        Int        @id @default(autoincrement())
-  nombre    String     @unique(map: "nombre") @db.VarChar(255)
-  ubicacion String?    @db.VarChar(255)
-  consumos  consumos[]
+  central_id                                                  Int                        @id @default(autoincrement()) @db.UnsignedInt
+  nombre                                                      String                     @unique(map: "nombre") @db.VarChar(150)
+  ubicacion_estado                                            String                     @db.LongText
+  nomenclatura                                                String                     @db.VarChar(4)
+  direccion_completa                                          String?                    @db.VarChar(255)
+  tipo_central                                                centrales_tipo_central
+  estado_operacion                                            centrales_estado_operacion @default(operativa)
+  capacidad_mw                                                Decimal?                   @db.Decimal(8, 2)
+  ubicacion_municipio                                         String?                    @db.VarChar(100)
+  latitud                                                     Decimal?                   @db.Decimal(10, 6)
+  longitud                                                    Decimal?                   @db.Decimal(10, 6)
+  fecha_inicio_operacion                                      DateTime?                  @db.Date
+  observaciones                                               String?                    @db.Text
+  actualizado_en                                              DateTime?                  @default(now()) @db.DateTime(0)
+  eliminado_en                                                DateTime?                  @db.DateTime(0)
+  cmd                                                         Decimal?                   @db.Decimal(12, 3)
+  combustible_principal                                       Int?
+  combustible_secundario                                      Int?
+  combustibles_centrales_combustible_principalTocombustibles  combustibles?              @relation("centrales_combustible_principalTocombustibles", fields: [combustible_principal], references: [combustible_id], onDelete: Restrict, onUpdate: Restrict, map: "fk_combustible_principal")
+  combustibles_centrales_combustible_secundarioTocombustibles combustibles?              @relation("centrales_combustible_secundarioTocombustibles", fields: [combustible_secundario], references: [combustible_id], onDelete: Restrict, onUpdate: Restrict, map: "fk_combustible_secundario")
+  centrales_contactos                                         centrales_contactos[]
+
+  @@index([combustible_principal], map: "fk_combustible_principal")
+  @@index([combustible_secundario], map: "fk_combustible_secundario")
+}
+
+model centrales_contactos {
+  contacto_id   Int                               @id @default(autoincrement()) @db.UnsignedInt
+  central_id    Int                               @db.UnsignedInt
+  tipo_contacto centrales_contactos_tipo_contacto
+  nombre        String                            @db.VarChar(150)
+  telefono      String?                           @db.VarChar(20)
+  email         String?                           @db.VarChar(150)
+  centrales     centrales                         @relation(fields: [central_id], references: [central_id], onDelete: Cascade, map: "centrales_contactos_ibfk_1")
+
+  @@index([central_id], map: "central_id")
 }
 
 model combustibles {
-  combustible_id         Int                      @id @default(autoincrement())
-  nombre                 String                   @unique(map: "nombre") @db.VarChar(50)
-  unidad_fisica          String                   @db.VarChar(20)
-  poder_calorifico       Decimal                  @db.Decimal(10, 4)
-  inventario_combustible inventario_combustible[]
-  precios_plantas        precios_plantas[]
-  pronosticos            pronosticos[]
-  resumen_consumo        resumen_consumo[]
+  combustible_id                                           Int                      @id @default(autoincrement())
+  nombre                                                   String                   @unique(map: "nombre") @db.VarChar(50)
+  unidad_fisica                                            String                   @db.VarChar(20)
+  poder_calorifico                                         Decimal                  @db.Decimal(10, 4)
+  descripcion                                              String?                  @db.Text
+  codigo_sap                                               String?                  @db.VarChar(20)
+  densidad                                                 Decimal?                 @db.Decimal(10, 4)
+  estado                                                   combustibles_estado      @default(activo)
+  fecha_creacion                                           DateTime                 @default(now()) @db.DateTime(0)
+  fecha_modificacion                                       DateTime?                @db.DateTime(0)
+  observaciones                                            String?                  @db.Text
+  centrales_centrales_combustible_principalTocombustibles  centrales[]              @relation("centrales_combustible_principalTocombustibles")
+  centrales_centrales_combustible_secundarioTocombustibles centrales[]              @relation("centrales_combustible_secundarioTocombustibles")
+  inventario_combustible                                   inventario_combustible[]
+  precios_plantas                                          precios_plantas[]
+  pronosticos                                              pronosticos[]
+  resumen_consumo                                          resumen_consumo[]
 }
 
 model consumos {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   centralId Int
-  fecha     DateTime  @db.Date
-  valorGJ   Float     @db.Float
-  centrales centrales @relation(fields: [centralId], references: [id], onUpdate: Restrict, map: "fk_central")
-
-  @@unique([centralId, fecha], map: "unique_central_fecha")
+  fecha     DateTime @db.Date
+  valorGJ   Float    @db.Float
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -202,6 +241,14 @@ enum alertas_tipo {
   Inventario
 }
 
+enum centrales_contactos_tipo_contacto {
+  principal
+  produccion
+  mantenimiento
+  seguridad
+  administrativo
+}
+
 enum plantas_tipo {
   Termica
   Diesel
@@ -220,6 +267,28 @@ enum webhook_queue_status {
   pending
   sent
   failed
+}
+
+enum centrales_tipo_central {
+  termoel_ctrica  @map("termoeléctrica")
+  hidroel_ctrica  @map("hidroeléctrica")
+  e_lica          @map("eólica")
+  solar
+  geot_rmica      @map("geotérmica")
+  ciclo_combinado @map("ciclo combinado")
+  otro
+}
+
+enum centrales_estado_operacion {
+  operativa
+  en_mantenimiento
+  fuera_de_servicio
+  en_construccion
+}
+
+enum combustibles_estado {
+  activo
+  inactivo
 }
 
 enum historial_precios_operacion {

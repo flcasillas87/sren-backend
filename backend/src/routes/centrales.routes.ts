@@ -3,6 +3,6 @@ import * as centralesController from '../controllers/centrales.controller.js';
 
 const router = Router();
 
-router.post('/', centralesController.agregarCentral);
+router.get('/', centralesController.obtenerCentrales);
 
 export default router;
