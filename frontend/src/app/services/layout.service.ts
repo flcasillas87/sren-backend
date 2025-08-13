@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { FooterContent } from '../../core/models/layout.model';
+import { FooterContent } from '../core/models/layout.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({

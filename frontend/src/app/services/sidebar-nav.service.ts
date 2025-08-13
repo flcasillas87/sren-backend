@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MenuItem } from '../models/layout.model';
+import { MenuItem } from '../core/models/layout.model';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +60,7 @@ export class SidebarNavService {
 
   // BehaviorSubject que mantiene la lista filtrada de elementos del menú
   private filteredMenuItemsSubject = new BehaviorSubject<MenuItem[]>(
-    this.menuItemsSubject.value,
+    this.menuItemsSubject.value
   );
 
   // Observable que expone la lista de elementos del menú
@@ -93,7 +93,7 @@ export class SidebarNavService {
   // Método para eliminar un elemento del menú
   deleteMenuItem(id: number): void {
     const currentItems = this.menuItemsSubject.value.filter(
-      (item) => item.id !== id,
+      (item) => item.id !== id
     );
     this.menuItemsSubject.next(currentItems);
     this.filteredMenuItemsSubject.next(this.menuItemsSubject.value); // Actualiza la lista filtrada
@@ -102,7 +102,7 @@ export class SidebarNavService {
   // Método para buscar elementos del menú por término de búsqueda
   searchMenuItems(searchTerm: string): void {
     const filteredItems = this.menuItemsSubject.value.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     this.filteredMenuItemsSubject.next(filteredItems); // Actualiza los elementos filtrados
   }

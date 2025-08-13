@@ -5,7 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router'; // Importando RouterModule
-import { FooterContentService } from '../../../core/services/layout.service';
+import { FooterContentService } from '../../../services/layout.service';
 import { FooterContent } from '../../../core/models/layout.model';
 
 @Component({

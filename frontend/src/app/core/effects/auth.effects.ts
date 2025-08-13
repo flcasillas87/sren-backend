@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { setMessage } from '../actions/auth.actions';
+import { setMessage } from '../../actions/auth.actions';
 
 @Injectable()
 export class HelloEffects {
@@ -16,7 +16,7 @@ export class HelloEffects {
       map((action) => {
         console.log('Mensaje establecido:', action.message);
         return action;
-      }),
-    ),
+      })
+    )
   );
 }

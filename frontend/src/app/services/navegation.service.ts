@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MenuItem } from '../models/layout.model';
+import { MenuItem } from '../core/models/layout.model';
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +77,7 @@ export class MenuService {
   updateMenuItem(id: string | number, updatedItem: MenuItem): void {
     const currentItems = this.menuItemsSubject.value;
     const updatedItems = currentItems.map((item) =>
-      item.id === id ? updatedItem : item,
+      item.id === id ? updatedItem : item
     );
     this.menuItemsSubject.next(updatedItems);
     this.saveMenuItems(); // Guardar en localStorage después de actualizar
@@ -119,7 +119,7 @@ export class MenuService {
    * @returns Un Observable que emite la lista de elementos del menú filtrados.
    */
   filterMenuItems(
-    predicate: (item: MenuItem) => boolean,
+    predicate: (item: MenuItem) => boolean
   ): Observable<MenuItem[]> {
     return this.menuItems$.pipe(map((items) => items.filter(predicate)));
   }
@@ -133,9 +133,9 @@ export class MenuService {
     return this.menuItems$.pipe(
       map((items) =>
         items.filter((item) =>
-          item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-        ),
-      ),
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      )
     );
   }
 }

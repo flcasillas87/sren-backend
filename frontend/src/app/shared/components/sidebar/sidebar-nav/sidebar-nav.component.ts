@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SidebarNavService } from '../../../../core/services/sidebar-nav.service';
+import { SidebarNavService } from '../../../../services/sidebar-nav.service';
 import { MenuItem } from '../../../../core/models/layout.model';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
