@@ -1,27 +1,33 @@
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs';
+
+export type Central = {
+  central_id: string;
+  nombre: string;
+  ubicacion_estado: string;
+  ubicacion_municipio: string;
+  tipo_central: string;
+  estado_operacion: string;
+  capacidad_mw: number;
+  combustible_principal: string;
+  combustible_secundario: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class CentralesService {
-  // TODO: revisar DestroyRef + effect en servicio singleton
-  constructor() {
-    effect(() => {
-      destroyRef;
-      http;
-    }, { injector: this.destroyRef });
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = '/graphql';
 
-    effect(() => {
-      destroyRef;
-      http;
-    }, { injector: this.destroyRef });
-  }
+  // Señal reactiva que contiene las centrales
+  readonly centrales = signal<Central[]>([]);
 
-  private destroyRef = inject(DestroyRef);
-  private http = inject(HttpClient);
-  private apiUrl = '/graphql';
-
-  listarCentrales(): Observable<Central[]> {
-    return this.http.post<Central[]>(this.apiUrl, {
-      query: `
+  listarCentrales(): void {
+    this.http
+      .post<{ data: { centrales: Central[] } }>(this.apiUrl, {
+        query: `
         query GetCentrales {
           centrales {
             central_id
@@ -36,16 +42,11 @@ export class CentralesService {
           }
         }
       `,
-    });
+      })
+      .pipe(
+        map(res => res.data.centrales),
+        tap(data => this.centrales.set(data)) // Actualiza la señal
+      )
+      .subscribe();
   }
 }
-
-
-
-
-
-
-import { Central } from '../core/models/central.model';
-import { ChangeDetectionStrategy, Component, computed, Computed, DestroyRef, effect, inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';

@@ -1,28 +1,15 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-consumos-form',
-  imports: [
-    
-  ],
+  standalone: true,
   templateUrl: './consumos-form.component.html',
-  styleUrl: './consumos-form.component.css',
+  styleUrls: ['./consumos-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConsumosFormComponent {
-  // TODO: revisar DestroyRef + effect en servicio singleton
   constructor() {
-    effect(() => {
-      destroyRef;
-    }, { injector: this.destroyRef });
-
-    effect(() => {
-      destroyRef;
-    }, { injector: this.destroyRef });
+    // Si en el futuro necesitas efectos con signals, usa effect() aquí
+    // actualmente no hay signals, así que este constructor puede estar vacío
   }
-
-  private destroyRef = inject(DestroyRef);}
-
-
-
-
-import { ChangeDetectionStrategy } from '@angular/core';
-import { ChangeDetectionStrategy, Component, computed, Computed, DestroyRef, effect, inject, signal } from '@angular/core';
+}
