@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { setMessage } from '../../actions/auth.actions';
-
 @Injectable()
 export class HelloEffects {
-  constructor(private actions$: Actions) {}
+  // TODO: revisar DestroyRef + effect en servicio singleton
+  private destroyRef = inject(DestroyRef);
+  constructor(private actions$: Actions) {
+    effect(() => {
+      destroyRef;
+    }, { injector: this.destroyRef });
+
+    effect(() => {
+      destroyRef;
+    }, { injector: this.destroyRef });
+}
 
   // Define un efecto para manejar la acción setMessage
   setMessage$ = createEffect(() =>
@@ -20,3 +24,15 @@ export class HelloEffects {
     )
   );
 }
+
+
+
+
+
+
+
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { ChangeDetectionStrategy, Component, computed, Computed, DestroyRef, effect, inject, Injectable, signal } from '@angular/core';
+import { delay, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { setMessage } from '../../actions/auth.actions';

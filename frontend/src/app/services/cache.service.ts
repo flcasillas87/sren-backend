@@ -1,40 +1,51 @@
-import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
-  private cache: { [key: string]: any } = {};
+  // Señal que guarda la caché
+  private readonly cache = signal<{ [key: string]: any }>({});
 
-  constructor() {}
+  // Computed para obtener la caché completa de forma reactiva
+  readonly cache$ = computed(() => this.cache());
 
-  // Métodos de la caché
-
+  /** Guardar un valor en la caché */
   guardarEnCache(key: string, data: any): void {
-    this.cache[key] = data;
+    this.cache.update(c => ({ ...c, [key]: data }));
   }
 
+  /** Obtener un valor de la caché */
   obtenerDeCache(key: string): any {
-    return this.cache[key];
+    return this.cache()[key];
   }
 
+  /** Eliminar un valor de la caché */
   eliminarDeCache(key: string): void {
-    delete this.cache[key];
+    const c = { ...this.cache() };
+    delete c[key];
+    this.cache.set(c);
   }
 
+  /** Vaciar toda la caché */
   vaciarCache(): void {
-    this.cache = {};
+    this.cache.set({});
   }
 
+  /** Verificar si una clave está en la caché */
   estaEnCache(key: string): boolean {
-    return key in this.cache;
+    return key in this.cache();
   }
 
+  /** Obtener todas las claves de la caché */
   obtenerTodasLasClavesDeCache(): string[] {
-    return Object.keys(this.cache);
+    return Object.keys(this.cache());
   }
 
+  /** Obtener todos los valores de la caché */
   obtenerTodosLosValoresDeCache(): any[] {
-    return Object.values(this.cache);
+    return Object.values(this.cache());
   }
 }
+
+
+
+import { computed, Injectable, signal } from '@angular/core';

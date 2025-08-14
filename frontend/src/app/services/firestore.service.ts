@@ -1,12 +1,3 @@
-import { Injectable, inject } from '@angular/core';
-import {
-  Firestore,
-  getFirestore,
-  enableMultiTabIndexedDbPersistence,
-} from '@angular/fire/firestore';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -39,3 +30,9 @@ export class FirestoreService {
     return this.firestore;
   }
 }
+
+
+
+
+import { enableMultiTabIndexedDbPersistence, Firestore, getFirestore,  } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';

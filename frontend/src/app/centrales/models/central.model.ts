@@ -1,4 +1,4 @@
-export interface Central {
+export type Central = {
   central_id: number;
   nombre: string;
   ubicacion_estado: string;

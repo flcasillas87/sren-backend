@@ -1,18 +1,45 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CentralesService } from '../';
-import { Central } from '../models/central.model';
-import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-centrales-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatProgressSpinnerModule],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    MatTableModule
+  ],
   templateUrl: './centrales-list.component.html',
   styleUrls: ['./centrales-list.component.css']
 })
-export class CentralesListComponent implements OnInit {
+export class CentralesListComponent  {
+  // TODO: revisar DestroyRef + effect en servicio singleton
+  constructor() {
+    effect(() => {
+      destroyRef;
+      centralesService;
+    }, { inject: this.destroyRef });
+
+    effect(() => {
+      destroyRef;
+      centralesService;
+    }, { injector: this.destroyRef });
+
+    effect(() => {
+      destroyRef;
+      centralesService;
+    }, { injector: this.destroyRef });
+
+    effect(() => {
+      destroyRef;
+      centralesService;
+    }, { injector: this.destroyRef });
+
+    effect(() => {
+      destroyRef;
+      centralesService;
+    }, { injector: this.destroyRef });
+  }
+
+  private destroyRef = inject(DestroyRef);
   private centralesService = inject(CentralesService);
 
   centrales: Central[] = [];
@@ -23,9 +50,7 @@ export class CentralesListComponent implements OnInit {
   ];
   loading = false;
 
-  ngOnInit() {
-    this.cargarCentrales();
-  }
+  
 
   cargarCentrales() {
     this.loading = true;
@@ -41,3 +66,17 @@ export class CentralesListComponent implements OnInit {
     });
   }
 }
+
+
+
+
+
+
+
+
+import { Central } from '../models/central.model';
+import { CentralesService } from '../';
+import { ChangeDetectionStrategy, Component, computed, Computed, DestroyRef, effect, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';

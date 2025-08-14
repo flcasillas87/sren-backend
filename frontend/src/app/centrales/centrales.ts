@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-centrales',
-  imports: [],
   templateUrl: './centrales.html',
-  styleUrl: './centrales.css'
+  styleUrls: ['./centrales.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    // Agrega aquí módulos standalone que necesites, ej: CommonModule
+  ],
 })
-export class Centrales {
-
-}
+export class Centrales {}
