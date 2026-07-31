@@ -19,10 +19,16 @@ comment on column public.reporte_operativo_combustibles.id_combustible is
     'Referencia al tipo de combustible entregado.';
 
 comment on column public.reporte_operativo_combustibles.id_unidad_medida is
-    'Referencia a la unidad de medida del volumen entregado.';
+    'Referencia a la unidad de medida del volumen entregado. FK a datos_maestros.cat_unidades_medida.';
 
 comment on column public.reporte_operativo_combustibles.volumen is
     'Volumen de combustible entregado en la unidad especificada.';
+
+comment on column public.reporte_operativo_combustibles.fecha_carga is
+    'Fecha y hora de carga del registro.';
+
+comment on column public.reporte_operativo_combustibles.usuario_carga is
+    'Usuario que registro la carga.';
 
 comment on column public.reporte_operativo_combustibles.es_activo is
     'Indicador de registro activo para reportes y consultas.';

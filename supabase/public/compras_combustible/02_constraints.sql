@@ -7,8 +7,6 @@ alter table public.compras_combustible
         primary key (id_compra_combustible),
     add constraint uq_compras_combustible_documento_linea
         unique (fecha_compra, id_proveedor, id_central_generacion, id_combustible, documento_referencia, linea_documento),
-    add constraint ck_compras_combustible_importes
-        check (cantidad > 0 and precio_unitario >= 0 and importe_total >= 0),
     add constraint fk_compras_combustible_proveedor
         foreign key (id_proveedor)
         references datos_maestros.cat_proveedores(id_proveedor)
@@ -28,4 +26,3 @@ alter table public.compras_combustible
     add constraint fk_compras_combustible_created_by
         foreign key (created_by)
         references auth.users(id);
-

@@ -27,7 +27,7 @@ copy staging.precios_vinculantes_combustibles_raw (
     archivo_origen,
     fecha_carga
 )
-from '/data/precios_vinculantes_combustibles.csv'
+from '/data/public.precios_vinculantes_combustibles.csv'
 csv header;
 
 insert into staging.stg_precios_vinculantes_combustibles (

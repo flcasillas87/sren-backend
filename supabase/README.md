@@ -342,6 +342,8 @@ Los siguientes puntos siguen siendo relevantes para consolidar el proyecto:
 - [staging/precios_vinculantes_combustibles/README.md](./staging/precios_vinculantes_combustibles/README.md)
 - [public/precios_vinculantes_combustibles/README.md](./public/precios_vinculantes_combustibles/README.md)
 - [reporting/precios_vinculantes_combustibles/README.md](./reporting/precios_vinculantes_combustibles/README.md)
+- [public/reporte_operativo_combustibles/README.md](./public/reporte_operativo_combustibles/README.md)
+- [reporting/reporte_operativo_combustibles/README.md](./reporting/reporte_operativo_combustibles/README.md)
 
 ---
 

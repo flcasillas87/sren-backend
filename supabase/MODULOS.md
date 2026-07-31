@@ -46,11 +46,13 @@ Modulos principales:
 - `flujo_dolares`
 - `precios_vinculantes_combustibles`
 - `reporte_operativo_combustibles`
+- `reporte_operativo_combustibles`
 
 Observaciones:
 
 - `precios_vinculantes_combustibles` funciona como tabla de hechos y tiene auditoria propia.
 - `compras_combustible` ya sigue el modelo de hechos diarios con vista de reporting.
+- `reporte_operativo_combustibles` cubre entregas operativas y ya tiene su vista en `reporting`.
 - `detalle_suministro_combustibles` parece un modelo alterno o legacy y merece decision formal: mantener, migrar o retirar.
 - Los cargos especializados estan mejor separados que una tabla unica de detalles.
 
@@ -82,6 +84,7 @@ Modulos actuales:
 
 - `precios_vinculantes_combustibles`
 - `compras_combustible`
+- `reporte_operativo_combustibles`
 - `diario_documentos`
 - `cat_proveedores`
 - `cat_centros_gestores`
@@ -128,4 +131,3 @@ Observaciones:
 4. Mantener `reporting` como capa de consumo.
 5. Revisar `detalle_suministro_combustibles` como modelo legacy o alterno.
 6. Completar README por modulo donde falte, empezando por `compras_combustible`.
-

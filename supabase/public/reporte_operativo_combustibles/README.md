@@ -23,13 +23,17 @@ El modelo registra entregas de combustible por central generadora y tipo de
 combustible, permitiendo construir reportes operativos de volumen, costos e
 informacion de origen.
 
+La unidad de medida se resuelve contra `datos_maestros.cat_unidades_medida` y
+se mantiene en la tabla final como `id_unidad_medida`.
+
 ## Consideraciones de homologacion
 
 - Usa `datos_maestros.cat_*` para enriquecer la vista de reporting con nombres.
 - Sigue la estructura modular de `precios_vinculantes_combustibles` y
   `detalle_suministro_combustibles`.
-- La vista `reporting.vw_reporte_operativo_combustible` expone datos listos para
+- La vista `reporting.vw_reporte_operativo_combustibles` expone datos listos para
   consumo de BI.
+- La unidad de medida visible en BI viene de `datos_maestros.cat_unidades_medida`.
 
 ## Mejora recomendada
 

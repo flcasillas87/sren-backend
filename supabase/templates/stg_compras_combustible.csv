@@ -1,0 +1,2 @@
+﻿fecha_compra,rfc_proveedor,nombre_proveedor,nombre_central,nombre_combustible,nombre_unidad_medida,documento_referencia,linea_documento,cantidad,precio_unitario,importe_total,moneda,fuente,observaciones,archivo_origen,fecha_carga,usuario_carga
+31/07/2026,CFE150212ABC,CFE ENERGÍA S.A. DE C.V.,CTG Parque,Diesel,Litro,OC-PRUEBA-001,1,1000,21.5,21500,MXN,prueba,Carga de ejemplo para compras de combustible.,compras_combustible_rows.csv,31/07/2026 08:00,

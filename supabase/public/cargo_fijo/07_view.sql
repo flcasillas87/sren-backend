@@ -1,3 +1,3 @@
--- Vista movida a reporting.vw_cargo_fijo
-create or replace view public.vw_cargo_fijo as
-select * from reporting.vw_cargo_fijo;
+-- Vista movida a reporting.vw_cargo_fijo.
+-- Este archivo se conserva solo como referencia histórica.
+-- La capa de consumo debe usar reporting.vw_cargo_fijo.

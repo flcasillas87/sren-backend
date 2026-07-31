@@ -1,3 +1,3 @@
--- Vista movida a reporting.vw_diario_pagos
-create or replace view public.vw_diario_pagos as
-select * from reporting.vw_diario_pagos;
+-- Vista movida a reporting.vw_diario_pagos.
+-- Este archivo se conserva solo como referencia histórica.
+-- La capa de consumo debe usar reporting.vw_diario_pagos.
