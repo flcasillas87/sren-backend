@@ -1,6 +1,6 @@
-# Tabla: precios_vinculantes_combustibles
+# Modulo: precios_vinculantes_combustibles
 
-Módulo para el registro y auditoría de precios vinculantes de combustibles.
+Registro y auditoria de precios vinculantes de combustibles.
 
 ## Objetivo
 Controlar precios habilitados por fecha, combustible, unidad de medida y central de generación, con auditoría de cambios y restricciones de edición histórica.
@@ -16,6 +16,12 @@ Controlar precios habilitados por fecha, combustible, unidad de medida y central
 - `07_view.sql`: vista de consumo basada en `reporting.vw_precios_vinculantes_combustibles`.
 - `logs.sql`: espacio para scripts de seguimiento adicionales.
 
+## Capa de datos
+
+- `public.precios_vinculantes_combustibles` es la tabla transaccional.
+- `public.audit_precios_vinculantes_combustibles` conserva el historial de cambios.
+- `reporting.vw_*` expone la capa de consumo.
+
 ## Tablas principales
 - `public.precios_vinculantes_combustibles`
   - Almacena precios vinculantes por fecha, combustible y central.
@@ -28,6 +34,12 @@ Controlar precios habilitados por fecha, combustible, unidad de medida y central
 - Inmutabilidad limitada: registros con `fecha` anteriores a 7 días no pueden actualizarse ni eliminarse.
 - Auditoría automática: cambios de precio generan registros en la tabla de auditoría.
 - `updated_at` se actualiza automáticamente en cada actualización del registro.
+
+## Homologacion recomendada
+
+- Mantener `es_activo` como nombre de estado para tablas nuevas.
+- Conservar `precio_vinculante_combustibles` solo donde el modelo ya esta desplegado.
+- Separar calculos y agregados en `reporting`, no en la tabla base.
 
 ## Dependencias
 - `datos_maestros.cat_combustibles`

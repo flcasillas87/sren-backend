@@ -1,9 +1,8 @@
-Análisis y homologación de `detalle_suministro_combustibles`
-==============================================================
+# Modulo legacy: detalle_suministro_combustibles
 
-Este directorio contiene la definición de la tabla de hechos `public.fact_precio_vinculante`.
-Su propósito es almacenar precios vinculantes de combustible con referencia a combustible y
-región, fechas de vigencia y metadatos de origen.
+Este directorio contiene el modelo alterno `public.fact_precio_vinculante`.
+Su proposito original era almacenar precios por combustible y region con vigencia,
+pero hoy debe evaluarse como modelo legacy frente a `precios_vinculantes_combustibles`.
 
 Estructura de archivos
 ----------------------
@@ -15,11 +14,10 @@ Estructura de archivos
 - `05_comments.sql`  → comentarios de tabla y columnas.
 - `06_seeds.sql`     → datos de semilla o pruebas.
 
-Comparación con `precios_vinculantes_combustibles`
---------------------------------------------------
-- `precios_vinculantes_combustibles` es un conjunto de objetos enfocado en reporting,
-  con una tabla de hechos (`public.precios_vinculantes_combustibles`) y vistas de reporte
-  en `reporting.*`.
+## Comparacion con `precios_vinculantes_combustibles`
+
+- `precios_vinculantes_combustibles` es el modelo operativo actual, con tabla base
+  y vistas de reporte en `reporting.*`.
 - `detalle_suministro_combustibles` define un modelo dimensional más clásico:
   una tabla de hechos (`fact_precio_vinculante`) y dimensiones (`dim_combustible`,
   `dim_region`).
@@ -48,25 +46,19 @@ Lógica del script
 - Validación:
   - `CHECK (fecha_fin_vigencia >= fecha_inicio_vigencia)`
 
-Homologación recomendada
-------------------------
-1. Unificar esquemas de maestro de datos.
-   - Si el proyecto usa `datos_maestros.*`, valorar mover o renombrar las dimensiones
-     `dim_combustible` y `dim_region` al esquema `datos_maestros`.
+## Homologacion recomendada
+
+1. Unificar el esquema de maestros.
+   - Si el proyecto se queda en `datos_maestros`, mover o mapear `dim_combustible` y
+     `dim_region` a esa capa.
 2. Homologar nombres de columnas.
-   - `activo` puede alinearse con `es_activo` usado en `precios_vinculantes_combustibles`.
-   - `precio_vinculante` podría coincidir con `precio_vinculante_combustibles` para mayor
-     consistencia.
-3. Añadir vistas de reporting.
-   - Crear vistas en `reporting.*` similares a `vw_precios_vigentes`,
-     `vw_comparativo_mensual`, `vw_reporte_mensual_por_central`, etc.
-   - Por ejemplo, una vista de precios vigentes usando `fecha_fin_vigencia >= current_date`.
-4. Añadir índices.
-   - Recomendado: `activo`, `id_combustible`, `id_region`, `fecha_inicio_vigencia`,
-     `fecha_fin_vigencia`.
-5. Documentar el modelo.
-   - Este README deja claro que la carpeta es un modelo de hechos dimensional,
-     no una colección de vistas.
+   - `activo` debe migrar a `es_activo` en desarrollos nuevos.
+   - `precio_vinculante` y `precio_vinculante_combustibles` deben decidirse como
+     nombre canonico unico.
+3. Crear vistas de reporting si el modulo se conserva.
+   - La capa de consumo debe vivir en `reporting`.
+4. Revisar si este modelo sigue siendo necesario.
+   - Si no aporta un caso de uso distinto, conviene retirarlo para evitar duplicidad.
 
 Siguientes pasos
 ----------------

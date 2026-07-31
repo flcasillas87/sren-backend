@@ -14,6 +14,7 @@
 7. [Vistas para reporteo y Power BI](#7-vistas-para-reporteo-y-power-bi)
 8. [Criterios de diseño](#8-criterios-de-diseño)
 9. [Pendientes de arquitectura](#9-pendientes-de-arquitectura)
+10. [Documentacion complementaria](#10-documentacion-complementaria)
 
 ---
 
@@ -71,7 +72,7 @@ Aquí viven:
 
 ### `etl`
 
-Usar esta carpeta para scripts de proceso, utilitarios y orquestación técnica.
+Usar esta carpeta para procedimientos de orquestacion, normalizacion y carga final.
 
 ### `shared`
 
@@ -195,6 +196,22 @@ Esto significa:
 
 No mezclar moneda y unidad física en una sola columna o asumir que una tarifa siempre está en USD o siempre en GJ si el modelo ya admite variantes.
 
+### Estándar de metadatos
+
+Las tablas persistentes nuevas deben priorizar:
+
+- `created_at`
+- `updated_at`
+- `observaciones`
+- `archivo_origen`
+- `fecha_carga`
+- `usuario_carga`
+
+Cuando el negocio lo requiera:
+
+- `es_activo` para vigencia o disponibilidad
+- `created_by` y `updated_by` para trazabilidad funcional
+
 ---
 
 ## 6. Modelo funcional actual
@@ -309,10 +326,22 @@ El repositorio admite módulos con `00_*` y `08_*` cuando hay necesidades adicio
 Los siguientes puntos siguen siendo relevantes para consolidar el proyecto:
 
 1. definir una ruta única de despliegue entre carpetas SQL, `config.toml` y migraciones
-2. homologar tablas que todavía usan enums de moneda con el catálogo `cat_monedas`
-3. completar la separación real de contenido en algunas carpetas que hoy ya tienen nombres estándar pero aún conservan lógica mezclada
-4. decidir si las vistas analíticas crecerán lo suficiente para moverlas a un esquema dedicado de reportes
-5. cerrar el modelo de documento maestro que relaciona contratos, cargos y pagos de forma definitiva
+2. homologar columnas `activo`/`es_activo` en nuevos desarrollos y dejar `activo` solo como legado
+3. completar la separación real entre `staging`, `etl`, `public` y `reporting`
+4. decidir si las vistas analiticas deben vivir de forma permanente en `reporting` o en un esquema adicional de BI
+5. terminar de cerrar el modelo de compras, precios y cargos con granularidad diaria donde aplique
+
+---
+
+## 10. Documentacion complementaria
+
+- [ESTANDARES.md](./ESTANDARES.md)
+- [MODULOS.md](./MODULOS.md)
+- [public/compras_combustible/README.md](./public/compras_combustible/README.md)
+- [staging/compras_combustible/README.md](./staging/compras_combustible/README.md)
+- [staging/precios_vinculantes_combustibles/README.md](./staging/precios_vinculantes_combustibles/README.md)
+- [public/precios_vinculantes_combustibles/README.md](./public/precios_vinculantes_combustibles/README.md)
+- [reporting/precios_vinculantes_combustibles/README.md](./reporting/precios_vinculantes_combustibles/README.md)
 
 ---
 

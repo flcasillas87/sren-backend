@@ -1,6 +1,6 @@
 # Staging: compras_combustible
 
-Flujo diario de compras de combustible.
+Flujo diario de compras de combustible alineado a `ESTANDARES.md`.
 
 Orden recomendado:
 
@@ -25,3 +25,16 @@ El proceso carga compras diarias con:
 - documento de referencia
 - metadatos de carga
 
+## Reglas principales
+
+- El archivo debe cargar texto bruto primero.
+- La validacion debe resolver proveedor, central, combustible y unidad contra `datos_maestros`.
+- La escritura final pertenece a `etl.pr_load_compras_combustible()`.
+- El grano es diario por documento y linea.
+
+## Metadatos esperados
+
+- `archivo_origen`
+- `fecha_carga`
+- `usuario_carga`
+- `observaciones`
