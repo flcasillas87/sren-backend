@@ -12,11 +12,11 @@
 --   legibilidad y reduce riesgo de inconsistencias.
 --
 -- Uso típico:
---   SELECT * FROM public.vw_comparativo_mensual
+--   SELECT * FROM reporting.vw_precios_vinculantes_combustibles_comparativo_mensual
 --   WHERE anio = 2025 AND mes = 9
 --   ORDER BY central, combustible;
 -- =============================================================================
-create or replace view reporting.vw_comparativo_mensual as
+create or replace view reporting.vw_precios_vinculantes_combustibles_comparativo_mensual as
 with precios_mensuales as (
     -- Paso 1: agregar precios a nivel mensual por combinación
     select

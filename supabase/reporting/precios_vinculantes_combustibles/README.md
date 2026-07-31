@@ -14,19 +14,22 @@ de analitica y BI, con nombres legibles y reglas de consumo estables.
 - `vw_reporte_mensual_por_central.sql`
 - `vw_reporte_precios_por_central.sql`
 - `vw_comparativo_mensual.sql`
+- `vw_proyeccion_precio_diario_3m.sql`
 - `vw_historico_auditoria.sql`
 - `vw_alertas_vencimiento.sql`
 - `00_indexes_and_materialized_views.sql`
 
 ## Que hace cada vista
 
-- `vw_precios_vigentes`: precio vigente por central, combustible y unidad.
-- `vw_precios_detalle`: detalle diario completo con costo MBTU.
-- `vw_reporte_mensual_por_central`: filas diarias para un mes.
-- `vw_reporte_precios_por_central`: agregados mensuales por central.
-- `vw_comparativo_mensual`: comparacion mes a mes con variacion.
-- `vw_historico_auditoria`: historial de cambios de precio.
-- `vw_alertas_vencimiento`: registros dentro de la ventana editable.
+- `vw_precios_vinculantes_combustibles_vigentes`: precio vigente por central, combustible y unidad.
+- `vw_precios_vinculantes_combustibles_detalle`: detalle diario completo con costo MBTU.
+- `vw_precios_vinculantes_combustibles_reporte_mensual_por_central`: filas diarias para un mes.
+- `vw_precios_vinculantes_combustibles_reporte_ano_mes`: agregados mensuales por central.
+- `vw_precios_vinculantes_combustibles_comparativo_mensual`: comparacion mes a mes con variacion.
+- `vw_precios_vinculantes_combustibles_proyeccion_precio_diario_3m`: proyeccion diaria a 90 dias basada en el
+  promedio de los promedios mensuales de los ultimos 3 meses completos.
+- `vw_precios_vinculantes_combustibles_historico_auditoria`: historial de cambios de precio.
+- `vw_precios_vinculantes_combustibles_alertas_vencimiento`: registros dentro de la ventana editable.
 - `00_indexes_and_materialized_views`: sugerencias de indices y materializaciones.
 
 ## Dependencias

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Vista: detalle de precios vinculantes con costo en MBTU
 -- =============================================================================
-create or replace view reporting.vw_precios_vinculantes_combustibles as
+create or replace view reporting.vw_precios_vinculantes_combustibles_detalle as
 select p.fecha,
     c.nombre_combustible as combustible,
     cg.nombre_central as central_generacion,

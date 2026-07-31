@@ -12,11 +12,11 @@
 --   VIGENTE  → 5 a 7 días restantes
 --
 -- Uso típico:
---   SELECT * FROM public.vw_alertas_vencimiento
+--   SELECT * FROM reporting.vw_precios_vinculantes_combustibles_alertas_vencimiento
 --   WHERE urgencia = 'CRÍTICO'
 --   ORDER BY dias_restantes;
 -- =============================================================================
-create or replace view reporting.vw_alertas_vencimiento as
+create or replace view reporting.vw_precios_vinculantes_combustibles_alertas_vencimiento as
 with registros_editables as (
     -- Calcular días restantes una sola vez para reutilizar en semáforo
     select

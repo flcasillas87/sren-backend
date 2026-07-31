@@ -7,11 +7,11 @@
 --   Incluye variación absoluta y porcentual por cambio.
 --
 -- Uso típico:
---   SELECT * FROM public.vw_historico_auditoria
+--   SELECT * FROM reporting.vw_precios_vinculantes_combustibles_historico_auditoria
 --   WHERE central = 'CC Huinalá II'
 --   ORDER BY fecha_cambio DESC;
 -- =============================================================================
-create or replace view reporting.vw_historico_auditoria as
+create or replace view reporting.vw_precios_vinculantes_combustibles_historico_auditoria as
 select
     a.id_audit_precio_vinculante_combustible        as id_auditoria,
     a.fecha_cambio,

@@ -7,11 +7,11 @@
 --   Diseñada para exportarse directamente a Excel como reporte mensual formal.
 --
 -- Uso típico:
---   SELECT * FROM public.vw_reporte_mensual_por_central
+--   SELECT * FROM reporting.vw_precios_vinculantes_combustibles_reporte_mensual_por_central
 --   WHERE anio = 2025 AND mes = 9 AND central = 'CTG Huinalá'
 --   ORDER BY fecha;
 -- =============================================================================
-create or replace view reporting.vw_reporte_mensual_por_central as
+create or replace view reporting.vw_precios_vinculantes_combustibles_reporte_mensual_por_central as
 select
     extract(year  from pvc.fecha)::int          as anio,
     extract(month from pvc.fecha)::int          as mes,

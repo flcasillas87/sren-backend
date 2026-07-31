@@ -7,10 +7,10 @@
 --   Vista principal para reportes ejecutivos y consultas de precio actual.
 --
 -- Uso típico:
---   SELECT * FROM public.vw_precios_vigentes
+--   SELECT * FROM reporting.vw_precios_vinculantes_combustibles_vigentes
 --   WHERE central = 'CTG Huinalá';
 -- =============================================================================
-create or replace view reporting.vw_precios_vigentes as
+create or replace view reporting.vw_precios_vinculantes_combustibles_vigentes as
 with precio_rankeado as (
     select
         pvc.id_precio_vinculante_combustible,

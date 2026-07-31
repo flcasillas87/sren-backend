@@ -20,7 +20,6 @@ create table public.compras_combustible (
     moneda text not null default 'MXN',
     fuente text null,
     observaciones text null,
-    es_activo boolean default true,
     created_at timestamp default (now() at time zone 'America/Monterrey'),
     updated_at timestamp default (now() at time zone 'America/Monterrey'),
     created_by uuid default auth.uid(),
@@ -28,4 +27,3 @@ create table public.compras_combustible (
     fecha_carga timestamp null default (now() at time zone 'America/Monterrey'),
     usuario_carga uuid null default auth.uid()
 ) tablespace pg_default;
-

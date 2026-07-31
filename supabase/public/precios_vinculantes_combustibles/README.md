@@ -13,14 +13,14 @@ Controlar precios habilitados por fecha, combustible, unidad de medida y central
 - `04_triggers.sql`: triggers de validación, auditoría y actualización de `updated_at`.
 - `05_comments.sql`: comentarios `COMMENT ON` para tablas y columnas.
 - `06_seeds.sql`: datos semilla controlados.
-- `07_view.sql`: vista de consumo basada en `reporting.vw_precios_vinculantes_combustibles`.
+- `07_view.sql`: vista de consumo basada en `reporting.vw_precios_vinculantes_combustibles_*`.
 - `logs.sql`: espacio para scripts de seguimiento adicionales.
 
 ## Capa de datos
 
 - `public.precios_vinculantes_combustibles` es la tabla transaccional.
 - `public.audit_precios_vinculantes_combustibles` conserva el historial de cambios.
-- `reporting.vw_*` expone la capa de consumo.
+- `reporting.vw_precios_vinculantes_combustibles_*` expone la capa de consumo.
 
 ## Tablas principales
 - `public.precios_vinculantes_combustibles`
@@ -46,7 +46,7 @@ Controlar precios habilitados por fecha, combustible, unidad de medida y central
 - `datos_maestros.cat_unidades_medida`
 - `datos_maestros.cat_centrales_generacion`
 - `auth.users`
-- `reporting.vw_precios_vinculantes_combustibles`
+- `reporting.vw_precios_vinculantes_combustibles_*`
 - Función compartida `public.set_updated_at_mx()` definida en `supabase/shared/functions/fn_shared.sql`
 
 ## Orden de despliegue recomendado

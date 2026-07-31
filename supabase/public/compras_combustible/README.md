@@ -35,7 +35,6 @@ Campos relevantes:
 - `moneda`
 - `fuente`
 - `observaciones`
-- `es_activo`
 - `created_at`
 - `updated_at`
 - `created_by`
@@ -50,7 +49,7 @@ Campos relevantes:
 - La vista de reporting agrega por dia, central y combustible.
 - La unidad de medida siempre se resuelve contra el catalogo maestro antes de publicar.
 - El seed de prueba debe usar claves naturales, no UUID fijos.
-- Los renglones de respaldo pueden quedar con `es_activo = false` y `cantidad = 0` para no contaminar sumas ni BI.
+- No se usa `es_activo`; si una compra es invalida, se corrige o se elimina.
 
 ## Recomendaciones
 

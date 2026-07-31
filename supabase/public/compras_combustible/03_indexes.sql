@@ -7,7 +7,3 @@ create index if not exists idx_compras_combustible_fecha
 
 create index if not exists idx_compras_combustible_proveedor_central
     on public.compras_combustible (id_proveedor, id_central_generacion, id_combustible);
-
-create index if not exists idx_compras_combustible_activo
-    on public.compras_combustible (es_activo, fecha_compra);
-

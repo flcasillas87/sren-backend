@@ -16,8 +16,7 @@ insert into public.compras_combustible (
     moneda,
     fuente,
     observaciones,
-    archivo_origen,
-    es_activo
+    archivo_origen
 )
 select
     fecha_compra,
@@ -33,8 +32,7 @@ select
     moneda,
     fuente,
     observaciones,
-    archivo_origen,
-    true
+    archivo_origen
 from staging.compras_combustible_ready
 on conflict (fecha_compra, id_proveedor, id_central_generacion, id_combustible, documento_referencia, linea_documento)
 do update
@@ -47,6 +45,4 @@ set
     fuente = excluded.fuente,
     observaciones = excluded.observaciones,
     archivo_origen = excluded.archivo_origen,
-    es_activo = true,
     updated_at = (now() at time zone 'America/Monterrey');
-

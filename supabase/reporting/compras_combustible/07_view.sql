@@ -1,9 +1,4 @@
-drop view if exists public.vw_compras_cmd_seguimiento cascade;
-drop view if exists public.vw_compras_anuales_totales cascade;
-drop view if exists public.vw_compras_mensuales_totales cascade;
-drop view if exists public.vw_compras_mensuales_detalle_diario cascade;
-drop view if exists public.vw_compras_diarias cascade;
-drop view if exists public.vw_compras_combustible cascade;
+
 drop view if exists reporting.vw_compras_cmd_seguimiento cascade;
 drop view if exists reporting.vw_compras_anuales_totales cascade;
 drop view if exists reporting.vw_compras_mensuales_totales cascade;
@@ -33,7 +28,6 @@ select
     c.moneda,
     c.fuente,
     c.observaciones,
-    c.es_activo,
     c.created_at,
     c.updated_at,
     c.created_by,
@@ -48,8 +42,7 @@ join datos_maestros.cat_centrales_generacion cg
 join datos_maestros.cat_combustibles comb
   on comb.id_combustible = c.id_combustible
 join datos_maestros.cat_unidades_medida um
-  on um.id_unidad_medida = c.id_unidad_medida
-where c.es_activo = true;
+  on um.id_unidad_medida = c.id_unidad_medida;
 
 create view reporting.vw_compras_diarias as
 select
