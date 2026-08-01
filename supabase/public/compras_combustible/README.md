@@ -1,61 +1,47 @@
 # Modulo: compras_combustible
 
-Tabla  para registrar compras diarias de combustible.
+Registra operaciones MDA e INTRADAY y todas las revisiones posteriores de
+cantidad, precio de gas y precio de servicio. No almacena facturas y no utiliza
+`es_activo`.
 
-## Objetivo
+## Modelo
 
-Guardar cada compra con su proveedor, central, combustible, unidad, documento de referencia y metadatos de carga.
+- `public.compras_combustible`: identidad de la operación. Una fecha puede tener
+  varias operaciones mediante `numero_operacion_dia`.
+- `public.compras_combustible_versiones`: fotografías inmutables de cantidad y
+  precios. La versión 1 es original; las siguientes son ajustes.
+- `public.memoria_calculo_combustible`: parámetros del reporte mensual, como IVA,
+  poder calorífico, pedido y firmantes.
 
-La unidad de medida se normaliza contra `datos_maestros.cat_unidades_medida` y
-se expone como `id_unidad_medida` en la tabla final.
+La cantidad se almacena positiva. `sentido_operacion` distingue `COMPRA` y
+`VENTA`; las vistas convierten ventas a cantidad negativa. El costo del servicio
+se calcula sobre la cantidad absoluta, igual que en la memoria de referencia.
 
-## Capas relacionadas
+## Reglas de cálculo
 
-- `staging/compras_combustible`: recibe el archivo crudo y valida datos.
-- `etl/compras_combustible.sql`: resuelve llaves, normaliza y publica.
-- `public/compras_combustible`: tabla final operativa.
-- `reporting/compras_combustible`: vistas de consumo para BI.
+```text
+cantidad_firmada = COMPRA ? cantidad : -cantidad
+importe_gas = cantidad_firmada * precio_gas
+importe_servicio = abs(cantidad) * precio_servicio
+importe_total = importe_gas + importe_servicio
+precio_ponderado_gas = sum(importe_gas) / sum(cantidad_firmada)
+volumen_m3 = cantidad_GJ / poder_calorifico_MJ_m3 * 1000
+```
 
-## Tabla principal
+Una actualización recibida meses después crea una nueva versión y conserva la
+`fecha_suministro` original. `fecha_registro` indica cuándo se conoció la revisión.
 
-`public.compras_combustible`
+## Orden de despliegue
 
-Campos relevantes:
+1. `01_table.sql`
+2. `02_constraints.sql`
+3. `03_indexes.sql`
+4. `04_triggers.sql`
+5. `05_comments.sql`
+6. `etl/compras_combustible.sql`
+7. `staging/compras_combustible/02. transform/01.validate.sql`
+8. `reporting/compras_combustible/07_view.sql`
+9. `06_seeds.sql` solo para pruebas
 
-- `fecha_compra`
-- `id_proveedor`
-- `id_central_generacion`
-- `id_combustible`
-- `id_unidad_medida`
-- `documento_referencia`
-- `linea_documento`
-- `cantidad`
-- `precio_unitario`
-- `importe_total`
-- `moneda`
-- `fuente`
-- `observaciones`
-- `created_at`
-- `updated_at`
-- `created_by`
-- `archivo_origen`
-- `fecha_carga`
-- `usuario_carga`
-
-## Reglas de negocio
-
-- Una compra se identifica por `fecha_compra + id_proveedor + id_central_generacion + id_combustible + documento_referencia + linea_documento`.
-- El modelo es diario, no mensual.
-- La vista de reporting agrega por dia, central y combustible.
-- La unidad de medida siempre se resuelve contra el catalogo maestro antes de publicar.
-- El seed de prueba debe usar claves naturales, no UUID fijos.
-- No se usa `es_activo`; si una compra es invalida, se corrige o se elimina.
-
-## Recomendaciones
-
-- Mantener la granularidad diaria.
-- Separar compras de precios de referencia.
-- Agregar al menos un seed de prueba por combustible relevante cuando se pruebe el ETL.
-- Si se requiere trazabilidad extra, agregar `updated_by` de forma consistente con el resto del proyecto.
-- Para seguimiento operativo, usar `vw_compras_cmd_seguimiento` como referencia de capacidad de central frente al promedio diario mensual.
-- El `CMD` se toma como referencia operativa desde `datos_maestros.cat_centrales_generacion.capacidad_mw`.
+Las tablas tienen RLS habilitado y no incluyen políticas permisivas. El acceso
+debe otorgarse de acuerdo con el modelo de autorización del proyecto.

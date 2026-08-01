@@ -2,26 +2,23 @@
 -- COMMENTS para compras_combustible
 -- =============================================================================
 
-comment on table public.compras_combustible
-    is 'Registro diario de compras de combustible con detalle por documento y linea.';
-
-comment on column public.compras_combustible.fecha_compra
-    is 'Fecha en la que se realizo o registro la compra.';
-
-comment on column public.compras_combustible.documento_referencia
-    is 'Factura, orden, ticket o folio que identifica la compra.';
-
-comment on column public.compras_combustible.linea_documento
-    is 'Secuencia de linea dentro del documento de referencia.';
-
-comment on column public.compras_combustible.id_unidad_medida
-    is 'Referencia a la unidad de medida asociada a la compra. FK a datos_maestros.cat_unidades_medida.';
-
-comment on column public.compras_combustible.cantidad
-    is 'Cantidad comprada expresada en la unidad de medida indicada.';
-
-comment on column public.compras_combustible.precio_unitario
-    is 'Precio unitario por unidad de medida.';
-
-comment on column public.compras_combustible.importe_total
-    is 'Importe total de la linea de compra en la moneda registrada.';
+comment on column public.compras_combustible.fecha_suministro is
+    'Dia para el cual se compra o vende el combustible, aun si se ajusta meses despues.';
+comment on column public.compras_combustible.numero_operacion_dia is
+    'Secuencia para distinguir operaciones del mismo dia cuando no existe hora.';
+comment on column public.compras_combustible.modalidad_mercado is
+    'Modalidad de la operacion: MDA o INTRADAY.';
+comment on column public.compras_combustible.sentido_operacion is
+    'COMPRA o VENTA; reporting deriva la cantidad firmada sin almacenar negativos.';
+comment on column public.compras_combustible_versiones.numero_version is
+    'Secuencia inmutable; 1 es el valor original y las siguientes son ajustes.';
+comment on column public.compras_combustible_versiones.fecha_registro is
+    'Momento en que se conocio la version, distinto de la fecha de suministro.';
+comment on column public.compras_combustible_versiones.precio_gas is
+    'Precio unitario del energetico, sin incluir el servicio.';
+comment on column public.compras_combustible_versiones.precio_servicio is
+    'Precio unitario del servicio asociado a la cantidad absoluta.';
+comment on column public.memoria_calculo_combustible.periodo_servicio is
+    'Primer dia del mes que identifica el periodo de la memoria.';
+comment on column public.memoria_calculo_combustible.poder_calorifico_mj_m3 is
+    'Poder calorifico usado para convertir GJ a m3: GJ / (MJ/m3) * 1000.';

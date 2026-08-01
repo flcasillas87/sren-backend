@@ -1,40 +1,25 @@
 # Staging: compras_combustible
 
-Flujo diario de compras de combustible alineado a `ESTANDARES.md`.
+Carga por lotes de operaciones originales y ajustes de combustible.
 
-Orden recomendado:
+## Orden recomendado
 
-1. `01. staging/01. table_stg.sql`
-2. `01. staging/02. load_csv.sql`
-3. `02. transform/01.validate.sql`
-4. `02. transform/02.transform_logic.sql`
-5. `02. transform/03.prepare_merge.sql`
-6. `03. load/01. merge.sql`
-7. `03. load/02. clean.sql`
+1. Crear `staging.stg_compras_combustible`.
+2. Crear `staging.vw_compras_combustible_validation_errors`.
+3. Cargar el CSV asignando un único `batch_id` a toda la corrida.
+4. Ejecutar `call etl.pr_load_compras_combustible(batch_id)`.
+5. Consultar la vista de errores si la transacción es rechazada.
 
-El proceso carga compras diarias con:
+## Comportamiento
 
-- fecha de compra
-- proveedor
-- central generadora
-- combustible
-- unidad de medida
-- cantidad
-- precio unitario
-- importe total
-- documento de referencia
-- metadatos de carga
+- Todo el archivo entra primero como texto.
+- El ETL resuelve proveedor, central, combustible y unidad contra
+  `datos_maestros`.
+- Ninguna fila con errores se publica y el lote se conserva para diagnóstico.
+- Un `AJUSTE` requiere que exista previamente su operación.
+- Una versión idéntica a la última se ignora para hacer la carga idempotente.
+- El proceso se serializa con un advisory lock para evitar colisiones entre
+  cargas concurrentes.
+- Tras una carga exitosa solo se eliminan las filas del `batch_id` procesado.
 
-## Reglas principales
-
-- El archivo debe cargar texto bruto primero.
-- La validacion debe resolver proveedor, central, combustible y unidad contra `datos_maestros`.
-- La escritura final pertenece a `etl.pr_load_compras_combustible()`.
-- El grano es diario por documento y linea.
-
-## Metadatos esperados
-
-- `archivo_origen`
-- `fecha_carga`
-- `usuario_carga`
-- `observaciones`
+La plantilla se encuentra en `supabase/templates/stg_compras_combustible.csv`.

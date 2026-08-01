@@ -1,46 +1,20 @@
 # Plantilla: stg_compras_combustible
 
-Plantilla de carga para el modulo `compras_combustible`.
-
-## Uso
-
-1. Copia el archivo CSV.
-2. Reemplaza los valores de ejemplo por tus compras reales.
-3. Mantén los nombres de negocio tal como existen en `datos_maestros`.
-4. Sube el archivo al proceso de staging.
+Plantilla de carga para operaciones y ajustes del modulo `compras_combustible`.
 
 ## Columnas
 
-- `fecha_compra`: fecha de la compra en `DD/MM/YYYY` o `YYYY-MM-DD`.
-- `rfc_proveedor`: RFC del proveedor para validacion rapida.
-- `nombre_proveedor`: nombre fiscal del proveedor.
-- `nombre_central`: nombre exacto de la central generadora.
-- `nombre_combustible`: nombre del combustible.
-- `nombre_unidad_medida`: unidad usada en la compra.
-- `documento_referencia`: folio, OC, factura o documento de referencia.
-- `linea_documento`: numero de linea dentro del documento.
-- `cantidad`: volumen o cantidad comprada.
-- `precio_unitario`: precio unitario de compra.
-- `importe_total`: importe total de la linea.
-- `moneda`: moneda de la compra, por ejemplo `MXN`.
-- `fuente`: origen del dato, por ejemplo `csv`, `api`, `manual`.
-- `observaciones`: notas adicionales.
-- `archivo_origen`: nombre del archivo fuente.
-- `fecha_carga`: fecha y hora de carga del archivo.
-- `usuario_carga`: usuario que realizo la carga, si aplica.
+- `fecha_suministro`: día para el que aplica el volumen (`YYYY-MM-DD` o `DD/MM/YYYY`).
+- `numero_operacion_dia`: secuencia desde 1 cuando hay varias operaciones sin hora.
+- `rfc_proveedor` / `nombre_proveedor`: claves naturales para resolver el proveedor.
+- `nombre_central`, `nombre_combustible`, `nombre_unidad_medida`: catálogos maestros.
+- `modalidad_mercado`: `MDA` o `INTRADAY`.
+- `sentido_operacion`: `COMPRA` o `VENTA`; la cantidad siempre se carga positiva.
+- `cantidad`, `precio_gas`, `precio_servicio`: fotografía completa de la versión.
+- `tipo_version`: `ORIGINAL` para la primera carga o `AJUSTE` para una revisión.
+- `fecha_registro`: cuándo se recibió la versión; no cambia `fecha_suministro`.
+- `motivo_actualizacion`: explicación del ajuste.
+- Los campos restantes conservan referencia y trazabilidad de origen.
 
-## Reglas
-
-- No capturar IDs.
-- Usar nombres exactos de catalogo.
-- Dejar `archivo_origen` siempre informado.
-- Mantener una fila por linea de compra.
-- Si el documento tiene varias lineas, repetir `documento_referencia` y cambiar `linea_documento`.
-
-## Ejemplo
-
-- Proveedor: `CFE ENERGÍA S.A. DE C.V.`
-- Central: `CTG Parque`
-- Combustible: `Diesel`
-- Unidad: `Litro`
-- Documento: `OC-PRUEBA-001`
+Una carga `AJUSTE` requiere que la operación original ya exista. Si los valores son
+idénticos a la última versión, el ETL es idempotente y no agrega otra versión.

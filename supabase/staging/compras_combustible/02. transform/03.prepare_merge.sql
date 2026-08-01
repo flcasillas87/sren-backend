@@ -6,30 +6,15 @@ drop table if exists staging.compras_combustible_ready;
 
 create table staging.compras_combustible_ready as
 select
-    n.source_row,
-    n.batch_id,
-    n.fecha_compra,
+    n.*,
     p.id_proveedor,
     cg.id_central_generacion,
     c.id_combustible,
-    u.id_unidad_medida,
-    n.documento_referencia,
-    n.linea_documento,
-    n.cantidad,
-    n.precio_unitario,
-    n.importe_total,
-    n.moneda,
-    n.fuente,
-    n.observaciones,
-    n.archivo_origen,
-    n.fecha_carga,
-    n.usuario_carga
+    u.id_unidad_medida
 from staging.compras_combustible_normalized n
 join datos_maestros.cat_proveedores p
-  on (
-        upper(btrim(p.rfc)) = n.rfc_proveedor
-        or upper(btrim(p.razon_social)) = n.nombre_proveedor
-     )
+  on upper(btrim(p.rfc)) = n.rfc_proveedor
+  or upper(btrim(p.razon_social)) = n.nombre_proveedor
 join datos_maestros.cat_centrales_generacion cg
   on regexp_replace(upper(btrim(cg.nombre_central)), '\s+', ' ', 'g') = n.nombre_central
 join datos_maestros.cat_combustibles c
@@ -42,4 +27,3 @@ where not exists (
     from staging.vw_compras_combustible_validation_errors e
     where e.source_row = n.source_row
 );
-
